@@ -1,0 +1,10 @@
+[alias]
+	co = checkout
+	br = branch
+	ci = commit
+	st = status
+	l = log --pretty=format:'%C(yellow)%h %Cred%ad %Cblue%an%Cgreen%d %Creset%s' --date=short
+	s = status -sb
+	p = pull --ff-only
+	delete = !f(){\nGIT=echo\n\"$GIT\" show-ref --verify --quiet refs/heads/$1 > /dev/null && \"$GIT\" branch -D $1 &&\n\"$GIT\" ls-remote --heads origin | grep $1 > /dev/null && \"$GIT\" push origin --delete $1\n}
+	cleanup = !f(){\ngit branch --merged | grep -v \"\\*\\|master\" | xargs -n 1 git branch -d\n}
